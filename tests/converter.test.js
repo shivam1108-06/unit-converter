@@ -15,3 +15,16 @@ test("1 foot should convert to 12 inches", () => {
 test("12 inches should convert to 1 foot", () => {
   expect(convertLength(12, "inch", "foot")).toBe(1);
 });
+
+test("1 kilometer should convert to 0.621371 miles", () => {
+    expect(
+        convertLength(1, "kilometer", "mile")
+    ).toBeCloseTo(0.621371, 6);
+});
+
+test("1 mile should convert to 1.609344 kilometers", () => {
+    expect(
+        convertLength(1, "mile", "kilometer")
+    ).toBeCloseTo(1.609344, 6);
+});
+
