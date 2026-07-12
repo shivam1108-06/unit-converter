@@ -1,4 +1,4 @@
-const { convertLength ,  convertWeight,} = require("../src/converter");
+const { convertLength,convertWeight,convertTemperature,} = require("../src/converter");
 
 test("1000 meters should convert to 1 kilometer", () => {
     expect(convertLength(1000, "meter", "kilometer")).toBe(1);
@@ -46,4 +46,28 @@ test("1 pound should convert to 0.453592 kilograms", () => {
   expect(
     convertWeight(1, "pound", "kilogram")
   ).toBeCloseTo(0.453592, 6);
+});
+
+test("0 Celsius should convert to 32 Fahrenheit", () => {
+  expect(
+    convertTemperature(0, "celsius", "fahrenheit")
+  ).toBeCloseTo(32, 2);
+});
+
+test("32 Fahrenheit should convert to 0 Celsius", () => {
+  expect(
+    convertTemperature(32, "fahrenheit", "celsius")
+  ).toBeCloseTo(0, 2);
+});
+
+test("0 Celsius should convert to 273.15 Kelvin", () => {
+  expect(
+    convertTemperature(0, "celsius", "kelvin")
+  ).toBeCloseTo(273.15, 2);
+});
+
+test("273.15 Kelvin should convert to 0 Celsius", () => {
+  expect(
+    convertTemperature(273.15, "kelvin", "celsius")
+  ).toBeCloseTo(0, 2);
 });

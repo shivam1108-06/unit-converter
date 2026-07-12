@@ -37,7 +37,29 @@ function convertWeight(value, from, to) {
   return value * weightConversionFactors[key];
 }
 
+function convertTemperature(value, from, to) {
+
+  if (from === "celsius" && to === "fahrenheit") {
+    return (value * 9) / 5 + 32;
+  }
+
+  if (from === "fahrenheit" && to === "celsius") {
+    return ((value - 32) * 5) / 9;
+  }
+
+  if (from === "celsius" && to === "kelvin") {
+    return value + 273.15;
+  }
+
+  if (from === "kelvin" && to === "celsius") {
+    return value - 273.15;
+  }
+
+  throw new Error("Temperature conversion not supported");
+}
+
 module.exports = {
   convertLength,
   convertWeight,
+  convertTemperature,
 };
