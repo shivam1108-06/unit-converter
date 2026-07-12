@@ -1,3 +1,6 @@
+const historyList = document.getElementById("historyList");
+let conversionHistory = [];
+
 const category = document.getElementById("category");
 const fromUnit = document.getElementById("fromUnit");
 const toUnit = document.getElementById("toUnit");
@@ -57,6 +60,31 @@ function populateUnits() {
   updateResult();
 }
 
+function addToHistory(text) {
+  conversionHistory.unshift(text);
+
+  if (conversionHistory.length > 10) {
+    conversionHistory.pop();
+  }
+
+  renderHistory();
+}
+
+function renderHistory() {
+  historyList.innerHTML = "";
+
+  if (conversionHistory.length === 0) {
+    historyList.innerHTML = "<li>No conversions yet</li>";
+    return;
+  }
+
+  conversionHistory.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    historyList.appendChild(li);
+  });
+}
+
 function updateResult() {
   if (inputValue.value.trim() === "") {
     result.textContent = "0";
@@ -76,6 +104,11 @@ function updateResult() {
   // Same unit selected
   if (from === to) {
     result.textContent = value;
+
+    addToHistory(
+      `${value} ${from} → ${to} = ${value}`
+    );
+
     return;
   }
 
@@ -104,7 +137,13 @@ function updateResult() {
         return;
     }
 
-    result.textContent = Number(converted.toFixed(6));
+    const finalResult = Number(converted.toFixed(6));
+
+    result.textContent = finalResult;
+
+    addToHistory(
+      `${value} ${from} → ${to} = ${finalResult}`
+    );
   } catch (error) {
     console.error(error);
     result.textContent = "Conversion not supported";
@@ -119,3 +158,4 @@ toUnit.addEventListener("change", updateResult);
 
 // Initialize
 populateUnits();
+renderHistory();
