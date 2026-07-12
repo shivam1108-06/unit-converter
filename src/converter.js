@@ -79,9 +79,20 @@ function convertVolume(value, from, to) {
   return value * volumeConversionFactors[key];
 }
 
-module.exports = {
-  convertLength,
-  convertWeight,
-  convertTemperature,
-  convertVolume,
-};
+// Browser support
+if (typeof window !== "undefined") {
+  window.convertLength = convertLength;
+  window.convertWeight = convertWeight;
+  window.convertTemperature = convertTemperature;
+  window.convertVolume = convertVolume;
+}
+
+// Jest / Node.js support
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = {
+    convertLength,
+    convertWeight,
+    convertTemperature,
+    convertVolume,
+  };
+}
