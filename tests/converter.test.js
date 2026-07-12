@@ -1,4 +1,4 @@
-const { convertLength } = require("../src/converter");
+const { convertLength ,  convertWeight,} = require("../src/converter");
 
 test("1000 meters should convert to 1 kilometer", () => {
     expect(convertLength(1000, "meter", "kilometer")).toBe(1);
@@ -28,3 +28,22 @@ test("1 mile should convert to 1.609344 kilometers", () => {
     ).toBeCloseTo(1.609344, 6);
 });
 
+test("1 kilogram should convert to 1000 grams", () => {
+  expect(convertWeight(1, "kilogram", "gram")).toBe(1000);
+});
+
+test("1000 grams should convert to 1 kilogram", () => {
+  expect(convertWeight(1000, "gram", "kilogram")).toBe(1);
+});
+
+test("1 kilogram should convert to 2.20462 pounds", () => {
+  expect(
+    convertWeight(1, "kilogram", "pound")
+  ).toBeCloseTo(2.20462, 5);
+});
+
+test("1 pound should convert to 0.453592 kilograms", () => {
+  expect(
+    convertWeight(1, "pound", "kilogram")
+  ).toBeCloseTo(0.453592, 6);
+});

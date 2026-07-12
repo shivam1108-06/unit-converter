@@ -12,13 +12,32 @@ const conversionFactors = {
 function convertLength(value, from, to) {
   const key = `${from}-${to}`;
 
-  if (!conversionFactors[key]) {
-    throw new Error("Conversion not supported");
-  }
+  if (!(key in conversionFactors)) {
+     throw new Error("Length conversion not supported");
+}
 
   return value * conversionFactors[key];
 }
 
+const weightConversionFactors = {
+  "kilogram-gram": 1000,
+  "gram-kilogram": 0.001,
+
+  "kilogram-pound": 2.20462,
+  "pound-kilogram": 0.453592,
+};
+
+function convertWeight(value, from, to) {
+  const key = `${from}-${to}`;
+
+  if (!(key in weightConversionFactors)) {
+    throw new Error("Weight conversion not supported");
+  }
+
+  return value * weightConversionFactors[key];
+}
+
 module.exports = {
   convertLength,
+  convertWeight,
 };
