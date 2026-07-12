@@ -1,27 +1,22 @@
+const conversionFactors = {
+  "meter-kilometer": 0.001,
+  "kilometer-meter": 1000,
+
+  "foot-inch": 12,
+  "inch-foot": 1 / 12,
+
+  "kilometer-mile": 0.621371,
+  "mile-kilometer": 1.609344,
+};
+
 function convertLength(value, from, to) {
-  if (from === "meter" && to === "kilometer") {
-    return value / 1000;
+  const key = `${from}-${to}`;
+
+  if (!conversionFactors[key]) {
+    throw new Error("Conversion not supported");
   }
 
-  if (from === "kilometer" && to === "meter") {
-    return value * 1000;
-  }
-
-  if (from === "foot" && to === "inch") {
-    return value * 12;
-  }
-
-  if (from === "inch" && to === "foot") {
-    return value / 12;
-  }
-
-  if (from === "kilometer" && to === "mile") {
-    return value * 0.621371;
-  }
-
-  if (from === "mile" && to === "kilometer") {
-    return value * 1.609344;
-  }
+  return value * conversionFactors[key];
 }
 
 module.exports = {
