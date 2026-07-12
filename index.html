@@ -14,45 +14,31 @@
         <h1>Unit Converter</h1>
 
         <section>
-
             <label for="category">Category</label>
 
             <select id="category">
-
                 <option value="length">Length</option>
-
                 <option value="weight">Weight</option>
-
                 <option value="temperature">Temperature</option>
-
                 <option value="volume">Volume</option>
-
             </select>
-
         </section>
 
         <section>
-
             <label for="fromUnit">From</label>
 
             <select id="fromUnit">
-
             </select>
-
         </section>
 
         <section>
-
             <label for="toUnit">To</label>
 
             <select id="toUnit">
-
             </select>
-
         </section>
 
         <section>
-
             <label for="inputValue">Value</label>
 
             <input
@@ -60,23 +46,18 @@
                 id="inputValue"
                 placeholder="Enter value"
             >
-
         </section>
 
         <section>
-
             <h2>Result</h2>
 
             <p id="result">0</p>
 
-            <button id="copyBtn">
-                Copy
-            </button>
-
+            <button id="copyBtn">Copy</button>
+            <button id="resetBtn">Reset</button>
         </section>
 
         <section>
-
             <h2>History</h2>
 
             <button id="clearHistoryBtn">
@@ -86,10 +67,13 @@
             <ul id="historyList">
                 <li>No conversions yet</li>
             </ul>
-
-</section>
+        </section>
 
     </div>
+
+    <footer>
+        <p>© 2026 Shivam Kotak • Unit Converter</p>
+    </footer>
 
     <script src="src/converter.js"></script>
     <script src="script.js"></script>

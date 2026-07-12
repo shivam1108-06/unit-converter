@@ -1,112 +1,462 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* =========================
+   Google Font
+========================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* =========================
+   Reset
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    min-height: 100vh;
+:root{
+    --primary:#6366f1;
+    --secondary:#8b5cf6;
+    --success:#22c55e;
+    --danger:#ef4444;
+    --text:#1f2937;
+    --text-light:#6b7280;
+    --white:rgba(255,255,255,.18);
+    --border:rgba(255,255,255,.25);
+    --shadow:0 15px 40px rgba(0,0,0,.2);
+    --radius:22px;
 }
 
-.container {
-    background: white;
-
-    width: 400px;
-
-    padding: 25px;
-
-    border-radius: 10px;
-
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+body.dark{
+    --text:#f3f4f6;
+    --text-light:#d1d5db;
+    --white:rgba(20,20,25,.55);
+    --border:rgba(255,255,255,.08);
 }
 
-h1 {
-    text-align: center;
+/* =========================
+   Body
+========================= */
 
-    margin-bottom: 20px;
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:40px 20px;
+    color:var(--text);
+    background:linear-gradient(-45deg,#4f46e5,#7c3aed,#06b6d4,#3b82f6);
+    background-size:400% 400%;
+    animation:bgMove 15s ease infinite;
 }
 
-section {
-    margin-bottom: 18px;
-}
+/* Animated Background */
 
-label {
-    display: block;
+@keyframes bgMove{
 
-    margin-bottom: 8px;
-
-    font-weight: bold;
-}
-
-select,
-input {
-    width: 100%;
-
-    padding: 10px;
-
-    font-size: 16px;
-
-    border: 1px solid #ccc;
-
-    border-radius: 5px;
-}
-
-#result {
-    font-size: 28px;
-
-    font-weight: bold;
-
-    margin-bottom: 15px;
-
-    color: #0077ff;
-}
-
-button {
-    width: 100%;
-
-    padding: 10px;
-
-    border: none;
-
-    border-radius: 5px;
-
-    background: #0077ff;
-
-    color: white;
-
-    cursor: pointer;
-
-    font-size: 16px;
-}
-
-button:hover {
-    background: #005edb;
-}
-
-ul {
-    list-style: none;
-}
-
-li {
-    padding: 8px;
-
-    border-bottom: 1px solid #ddd;
-}
-
-@media (max-width: 480px) {
-
-    .container {
-
-        width: 95%;
-
+    0%{
+        background-position:0% 50%;
     }
 
+    50%{
+        background-position:100% 50%;
+    }
+
+    100%{
+        background-position:0% 50%;
+    }
 }
 
+/* =========================
+   Glass Card
+========================= */
+
+.container{
+
+    width:100%;
+    max-width:470px;
+
+    padding:35px;
+
+    border-radius:var(--radius);
+
+    background:var(--white);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow);
+
+    animation:fadeUp .8s ease;
+
+    transition:.3s;
+}
+
+.container:hover{
+    transform:translateY(-5px);
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(25px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   Heading
+========================= */
+
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    font-size:32px;
+    font-weight:700;
+}
+
+h2{
+    margin-bottom:12px;
+    font-size:20px;
+}
+
+/* =========================
+   Sections
+========================= */
+
+section{
+    margin-bottom:22px;
+}
+
+/* =========================
+   Labels
+========================= */
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+    color:var(--text);
+}
+
+/* =========================
+   Inputs
+========================= */
+
+select,
+input{
+
+    width:100%;
+
+    padding:14px 16px;
+
+    border-radius:12px;
+
+    border:2px solid transparent;
+
+    background:rgba(255,255,255,.8);
+
+    font-size:16px;
+
+    transition:.3s;
+}
+
+body.dark select,
+body.dark input{
+    background:#2d2d35;
+    color:#fff;
+}
+
+select:focus,
+input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 15px rgba(99,102,241,.3);
+
+    transform:scale(1.01);
+}
+
+/* =========================
+   Result
+========================= */
+
+#result{
+
+    margin-top:12px;
+    margin-bottom:20px;
+
+    text-align:center;
+
+    font-size:38px;
+    font-weight:700;
+
+    color:var(--primary);
+
+    word-break:break-word;
+}
+
+/* =========================
+   Buttons
+========================= */
+
+button{
+
+    width:100%;
+
+    margin-top:12px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:16px;
+    font-weight:600;
+
+    color:#fff;
+
+    background:linear-gradient(135deg,var(--primary),var(--secondary));
+
+    transition:.3s;
+
+    box-shadow:0 10px 20px rgba(99,102,241,.3);
+}
+
+button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 25px rgba(99,102,241,.4);
+}
+
+button:active{
+    transform:scale(.97);
+}
+
+/* Two Buttons */
+
+#copyBtn,
+#resetBtn{
+    width:48%;
+}
+
+#copyBtn{
+    margin-right:4%;
+}
+
+/* =========================
+   History Section
+========================= */
+
+#historyList{
+    list-style:none;
+    margin-top:15px;
+    max-height:220px;
+    overflow-y:auto;
+    padding-right:5px;
+}
+
+#historyList li{
+    background:rgba(255,255,255,.55);
+    backdrop-filter:blur(10px);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:12px;
+    padding:12px 15px;
+    margin-bottom:10px;
+    color:var(--text);
+    transition:.3s;
+    animation:slideIn .35s ease;
+}
+
+#historyList li:hover{
+    transform:translateX(5px);
+    background:rgba(255,255,255,.8);
+}
+
+body.dark #historyList li{
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+}
+
+/* =========================
+   Scrollbar
+========================= */
+
+#historyList::-webkit-scrollbar{
+    width:8px;
+}
+
+#historyList::-webkit-scrollbar-track{
+    background:rgba(255,255,255,.15);
+    border-radius:20px;
+}
+
+#historyList::-webkit-scrollbar-thumb{
+    background:linear-gradient(var(--primary),var(--secondary));
+    border-radius:20px;
+}
+
+#historyList::-webkit-scrollbar-thumb:hover{
+    background:#4f46e5;
+}
+
+/* =========================
+   Footer
+========================= */
+
+footer{
+    margin-top:25px;
+    text-align:center;
+    color:#fff;
+    font-size:14px;
+    opacity:.9;
+    letter-spacing:.5px;
+}
+
+/* =========================
+   Utility Classes
+========================= */
+
+.hidden{
+    display:none;
+}
+
+.fade{
+    animation:fade .35s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes slideIn{
+    from{
+        opacity:0;
+        transform:translateY(10px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* =========================
+   Dark Theme
+========================= */
+
+body.dark{
+    background:linear-gradient(-45deg,#111827,#1e293b,#0f172a,#312e81);
+    background-size:400% 400%;
+}
+
+body.dark .container{
+    color:#f8fafc;
+}
+
+body.dark label,
+body.dark h1,
+body.dark h2{
+    color:#f8fafc;
+}
+
+body.dark #result{
+    color:#8b5cf6;
+}
+
+body.dark footer{
+    color:#e5e7eb;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width:768px){
+
+    .container{
+        max-width:100%;
+        padding:25px;
+    }
+
+    h1{
+        font-size:28px;
+    }
+
+    #result{
+        font-size:32px;
+    }
+}
+
+@media (max-width:480px){
+
+    body{
+        padding:20px 12px;
+    }
+
+    .container{
+        padding:20px;
+        border-radius:18px;
+    }
+
+    h1{
+        font-size:24px;
+    }
+
+    h2{
+        font-size:18px;
+    }
+
+    select,
+    input,
+    button{
+        font-size:15px;
+    }
+
+    #copyBtn,
+    #resetBtn{
+        width:100%;
+        margin-right:0;
+    }
+
+    #result{
+        font-size:28px;
+    }
+
+    footer{
+        font-size:13px;
+    }
+}
+
+/* =========================
+   Smooth Page Animation
+========================= */
+
+html{
+    scroll-behavior:smooth;
+}
+
+.container,
+button,
+input,
+select,
+li{
+    transition:all .3s ease;
+}

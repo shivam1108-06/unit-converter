@@ -9,6 +9,7 @@ const toUnit = document.getElementById("toUnit");
 const inputValue = document.getElementById("inputValue");
 const result = document.getElementById("result");
 const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+const resetBtn = document.getElementById("resetBtn");
 
 const units = {
   length: [
@@ -201,6 +202,18 @@ function updateResult() {
   }
 }
 
+function resetConverter() {
+
+    category.selectedIndex = 0;
+
+    populateUnits();
+
+    inputValue.value = "";
+
+    result.textContent = "0";
+
+}
+
 // Event Listeners
 category.addEventListener("change", populateUnits);
 inputValue.addEventListener("input", updateResult);
@@ -210,6 +223,10 @@ copyBtn.addEventListener("click", copyResult);
 clearHistoryBtn.addEventListener(
     "click",
     clearHistory
+);
+resetBtn.addEventListener(
+    "click",
+    resetConverter
 );
 
 // Initialize
