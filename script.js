@@ -1,4 +1,5 @@
 const historyList = document.getElementById("historyList");
+const copyBtn = document.getElementById("copyBtn");
 let conversionHistory = [];
 
 const category = document.getElementById("category");
@@ -85,6 +86,38 @@ function renderHistory() {
   });
 }
 
+async function copyResult() {
+
+  const text = result.textContent;
+
+  if (
+    text === "0" ||
+    text === "Invalid Number" ||
+    text === "Conversion not supported"
+  ) {
+    return;
+  }
+
+  try {
+
+    await navigator.clipboard.writeText(text);
+
+    copyBtn.textContent = "Copied!";
+
+    setTimeout(() => {
+      copyBtn.textContent = "Copy";
+    }, 2000);
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Copy failed.");
+
+  }
+
+}
+
 function updateResult() {
   if (inputValue.value.trim() === "") {
     result.textContent = "0";
@@ -155,6 +188,7 @@ category.addEventListener("change", populateUnits);
 inputValue.addEventListener("input", updateResult);
 fromUnit.addEventListener("change", updateResult);
 toUnit.addEventListener("change", updateResult);
+copyBtn.addEventListener("click", copyResult);
 
 // Initialize
 populateUnits();
