@@ -1,77 +1,95 @@
 const category = document.getElementById("category");
-
 const fromUnit = document.getElementById("fromUnit");
-
 const toUnit = document.getElementById("toUnit");
-
 const inputValue = document.getElementById("inputValue");
-
 const result = document.getElementById("result");
 
-const lengthUnits = [
-  "meter",
-  "kilometer",
-  "foot",
-  "inch",
-  "mile"
-];
+const units = {
+  length: ["meter", "kilometer", "foot", "inch", "mile"],
 
-function populateUnits(){
+  weight: ["kilogram", "gram", "pound"],
 
-fromUnit.innerHTML="";
+  temperature: ["celsius", "fahrenheit", "kelvin"],
 
-toUnit.innerHTML="";
+  volume: ["liter", "milliliter", "gallon", "cup"],
+};
 
-lengthUnits.forEach(unit=>{
+function populateUnits() {
+  const selectedCategory = category.value;
 
-const option1=document.createElement("option");
+  fromUnit.innerHTML = "";
+  toUnit.innerHTML = "";
 
-option1.value=unit;
+  units[selectedCategory].forEach((unit) => {
+    const option1 = document.createElement("option");
+    option1.value = unit;
+    option1.textContent = unit;
+    fromUnit.appendChild(option1);
 
-option1.textContent=unit;
+    const option2 = document.createElement("option");
+    option2.value = unit;
+    option2.textContent = unit;
+    toUnit.appendChild(option2);
+  });
 
-fromUnit.appendChild(option1);
+  fromUnit.selectedIndex = 0;
+  toUnit.selectedIndex = 1;
 
-const option2=document.createElement("option");
-
-option2.value=unit;
-
-option2.textContent=unit;
-
-toUnit.appendChild(option2);
-
-});
-
+  updateResult();
 }
 
-function updateResult(){
-
-const from=fromUnit.value;
-
-const to=toUnit.value;
-
-if (inputValue.value === "") {
+function updateResult() {
+  if (inputValue.value === "") {
     result.textContent = "0";
     return;
+  }
+
+  const value = Number(inputValue.value);
+  const from = fromUnit.value;
+  const to = toUnit.value;
+
+  // Same unit selected
+  if (from === to) {
+    result.textContent = value;
+    return;
+  }
+
+  let converted;
+
+  try {
+    switch (category.value) {
+      case "length":
+        converted = convertLength(value, from, to);
+        break;
+
+      case "weight":
+        converted = convertWeight(value, from, to);
+        break;
+
+      case "temperature":
+        converted = convertTemperature(value, from, to);
+        break;
+
+      case "volume":
+        converted = convertVolume(value, from, to);
+        break;
+
+      default:
+        result.textContent = "Invalid Category";
+        return;
+    }
+
+    result.textContent = converted;
+  } catch (error) {
+    result.textContent = error.message;
+  }
 }
 
-const value = Number(inputValue.value);
+// Event Listeners
+inputValue.addEventListener("input", updateResult);
+fromUnit.addEventListener("change", updateResult);
+toUnit.addEventListener("change", updateResult);
+category.addEventListener("change", populateUnits);
 
-const converted=convertLength(value,from,to);
-
-result.textContent=converted;
-
-}
-
-inputValue.addEventListener("input",updateResult);
-
-fromUnit.addEventListener("change",updateResult);
-
-toUnit.addEventListener("change",updateResult);
-
+// Initialize
 populateUnits();
-
-fromUnit.value="meter";
-toUnit.value="kilometer";
-
-updateResult();
