@@ -1,12 +1,14 @@
 const historyList = document.getElementById("historyList");
 const copyBtn = document.getElementById("copyBtn");
-let conversionHistory = [];
+let conversionHistory =
+    JSON.parse(localStorage.getItem("history")) || [];
 
 const category = document.getElementById("category");
 const fromUnit = document.getElementById("fromUnit");
 const toUnit = document.getElementById("toUnit");
 const inputValue = document.getElementById("inputValue");
 const result = document.getElementById("result");
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 
 const units = {
   length: [
@@ -62,13 +64,19 @@ function populateUnits() {
 }
 
 function addToHistory(text) {
-  conversionHistory.unshift(text);
 
-  if (conversionHistory.length > 10) {
-    conversionHistory.pop();
-  }
+    conversionHistory.unshift(text);
 
-  renderHistory();
+    if(conversionHistory.length > 10){
+        conversionHistory.pop();
+    }
+
+    localStorage.setItem(
+        "history",
+        JSON.stringify(conversionHistory)
+    );
+
+    renderHistory();
 }
 
 function renderHistory() {
@@ -84,6 +92,16 @@ function renderHistory() {
     li.textContent = item;
     historyList.appendChild(li);
   });
+}
+
+function clearHistory(){
+
+    conversionHistory = [];
+
+    localStorage.removeItem("history");
+
+    renderHistory();
+
 }
 
 async function copyResult() {
@@ -189,6 +207,10 @@ inputValue.addEventListener("input", updateResult);
 fromUnit.addEventListener("change", updateResult);
 toUnit.addEventListener("change", updateResult);
 copyBtn.addEventListener("click", copyResult);
+clearHistoryBtn.addEventListener(
+    "click",
+    clearHistory
+);
 
 // Initialize
 populateUnits();
