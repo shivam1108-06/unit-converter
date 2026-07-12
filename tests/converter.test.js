@@ -107,3 +107,20 @@ test("1 cup should convert to 0.236588 liters", () => {
     convertVolume(1, "cup", "liter")
   ).toBeCloseTo(0.236588, 6);
 });
+
+test("5 meters should convert to 5 meters", () => {
+  expect(convertLength(5, "meter", "meter")).toBe(5);
+});
+
+test("10 kilograms should convert to 10 kilograms", () => {
+  expect(convertWeight(10, "kilogram", "kilogram")).toBe(10);
+});
+
+test("25 Celsius should convert to 25 Celsius", () => {
+  expect(convertTemperature(25, "celsius", "celsius")).toBe(25);
+});
+
+test("2 liters should convert to 2 liters", () => {
+  expect(convertVolume(2, "liter", "liter")).toBe(2);
+});
+

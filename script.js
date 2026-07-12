@@ -5,13 +5,32 @@ const inputValue = document.getElementById("inputValue");
 const result = document.getElementById("result");
 
 const units = {
-  length: ["meter", "kilometer", "foot", "inch", "mile"],
+  length: [
+    "meter",
+    "kilometer",
+    "foot",
+    "inch",
+    "mile"
+  ],
 
-  weight: ["kilogram", "gram", "pound"],
+  weight: [
+    "kilogram",
+    "gram",
+    "pound"
+  ],
 
-  temperature: ["celsius", "fahrenheit", "kelvin"],
+  temperature: [
+    "celsius",
+    "fahrenheit",
+    "kelvin"
+  ],
 
-  volume: ["liter", "milliliter", "gallon", "cup"],
+  volume: [
+    "liter",
+    "milliliter",
+    "gallon",
+    "cup"
+  ]
 };
 
 function populateUnits() {
@@ -39,12 +58,18 @@ function populateUnits() {
 }
 
 function updateResult() {
-  if (inputValue.value === "") {
+  if (inputValue.value.trim() === "") {
     result.textContent = "0";
     return;
   }
 
   const value = Number(inputValue.value);
+
+  if (isNaN(value)) {
+    result.textContent = "Invalid Number";
+    return;
+  }
+
   const from = fromUnit.value;
   const to = toUnit.value;
 
@@ -79,17 +104,18 @@ function updateResult() {
         return;
     }
 
-    result.textContent = converted;
+    result.textContent = Number(converted.toFixed(6));
   } catch (error) {
-    result.textContent = error.message;
+    console.error(error);
+    result.textContent = "Conversion not supported";
   }
 }
 
 // Event Listeners
+category.addEventListener("change", populateUnits);
 inputValue.addEventListener("input", updateResult);
 fromUnit.addEventListener("change", updateResult);
 toUnit.addEventListener("change", updateResult);
-category.addEventListener("change", populateUnits);
 
 // Initialize
 populateUnits();

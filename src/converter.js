@@ -10,6 +10,10 @@ const conversionFactors = {
 };
 
 function convertLength(value, from, to) {
+  if (from === to) {
+      return value;
+  }
+
   const key = `${from}-${to}`;
 
   if (!(key in conversionFactors)) {
@@ -28,6 +32,10 @@ const weightConversionFactors = {
 };
 
 function convertWeight(value, from, to) {
+  if (from === to) {
+    return value;
+ }
+
   const key = `${from}-${to}`;
 
   if (!(key in weightConversionFactors)) {
@@ -38,6 +46,9 @@ function convertWeight(value, from, to) {
 }
 
 function convertTemperature(value, from, to) {
+  if (from === to) {
+    return value;
+  }
 
   if (from === "celsius" && to === "fahrenheit") {
     return (value * 9) / 5 + 32;
@@ -70,6 +81,9 @@ const volumeConversionFactors = {
 };
 
 function convertVolume(value, from, to) {
+  if (from === to) {
+    return value;
+  }
   const key = `${from}-${to}`;
 
   if (!(key in volumeConversionFactors)) {
