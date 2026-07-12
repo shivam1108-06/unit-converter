@@ -1,4 +1,4 @@
-const { convertLength,convertWeight,convertTemperature,} = require("../src/converter");
+const { convertLength,convertWeight,convertTemperature,convertVolume,} = require("../src/converter");
 
 test("1000 meters should convert to 1 kilometer", () => {
     expect(convertLength(1000, "meter", "kilometer")).toBe(1);
@@ -70,4 +70,40 @@ test("273.15 Kelvin should convert to 0 Celsius", () => {
   expect(
     convertTemperature(273.15, "kelvin", "celsius")
   ).toBeCloseTo(0, 2);
+});
+
+test("1 liter should convert to 1000 milliliters", () => {
+  expect(
+    convertVolume(1, "liter", "milliliter")
+  ).toBe(1000);
+});
+
+test("1000 milliliters should convert to 1 liter", () => {
+  expect(
+    convertVolume(1000, "milliliter", "liter")
+  ).toBe(1);
+});
+
+test("1 liter should convert to 0.264172 gallons", () => {
+  expect(
+    convertVolume(1, "liter", "gallon")
+  ).toBeCloseTo(0.264172, 6);
+});
+
+test("1 gallon should convert to 3.78541 liters", () => {
+  expect(
+    convertVolume(1, "gallon", "liter")
+  ).toBeCloseTo(3.78541, 5);
+});
+
+test("1 liter should convert to 4.22675 cups", () => {
+  expect(
+    convertVolume(1, "liter", "cup")
+  ).toBeCloseTo(4.22675, 5);
+});
+
+test("1 cup should convert to 0.236588 liters", () => {
+  expect(
+    convertVolume(1, "cup", "liter")
+  ).toBeCloseTo(0.236588, 6);
 });

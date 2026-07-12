@@ -58,8 +58,30 @@ function convertTemperature(value, from, to) {
   throw new Error("Temperature conversion not supported");
 }
 
+const volumeConversionFactors = {
+  "liter-milliliter": 1000,
+  "milliliter-liter": 0.001,
+
+  "liter-gallon": 0.264172,
+  "gallon-liter": 3.78541,
+
+  "liter-cup": 4.22675,
+  "cup-liter": 0.236588,
+};
+
+function convertVolume(value, from, to) {
+  const key = `${from}-${to}`;
+
+  if (!(key in volumeConversionFactors)) {
+    throw new Error("Volume conversion not supported");
+  }
+
+  return value * volumeConversionFactors[key];
+}
+
 module.exports = {
   convertLength,
   convertWeight,
   convertTemperature,
+  convertVolume,
 };
